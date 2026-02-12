@@ -27,9 +27,10 @@ class TaskController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'due_date' => 'nullable|date|after_or_equal:today',
         ]);
         $task = Task::create($validated);
-        return response()->json($task, 211);// Retorna a tarefa criada com status 211(Created)
+        return response()->json($task, 201);// Retorna a tarefa criada com status 201(Created)
     }
 
     /**
@@ -55,6 +56,7 @@ class TaskController extends Controller
             'title' => 'sometimes|required|string|max:255',
             'description' => 'nullable|string',
             'is_completed' => 'sometimes|boolean',
+            'due_date' => 'nullable|date',
         ]);
         $task->update($validated);
         return response()->json($task);

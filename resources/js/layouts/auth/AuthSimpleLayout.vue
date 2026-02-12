@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import AppLogoIcon from '@/components/AppLogoIcon.vue';
 import { home } from '@/routes';
 
 defineProps<{
@@ -10,34 +9,34 @@ defineProps<{
 </script>
 
 <template>
-    <div
-        class="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10"
-    >
-        <div class="w-full max-w-sm">
-            <div class="flex flex-col gap-8">
-                <div class="flex flex-col items-center gap-4">
-                    <Link
-                        :href="home()"
-                        class="flex flex-col items-center gap-2 font-medium"
-                    >
-                        <div
-                            class="mb-1 flex h-9 w-9 items-center justify-center rounded-md"
-                        >
-                            <AppLogoIcon
-                                class="size-9 fill-current text-[var(--foreground)] dark:text-white"
-                            />
-                        </div>
-                        <span class="sr-only">{{ title }}</span>
-                    </Link>
-                    <div class="space-y-2 text-center">
-                        <h1 class="text-xl font-medium">{{ title }}</h1>
-                        <p class="text-center text-sm text-muted-foreground">
-                            {{ description }}
-                        </p>
-                    </div>
-                </div>
+    <div class="flex min-h-screen flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 p-4 transition-colors duration-300">
+        <div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700">
+            
+            <!-- HEADER DO CARD -->
+            <div class="p-8 text-center border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
+                <Link :href="home()" class="inline-flex items-center gap-2 group">
+                    <span class="text-2xl font-bold tracking-tight text-blue-600 dark:text-blue-400 group-hover:opacity-80 transition">
+                        Task Manager
+                    </span>
+                </Link>
+                <h2 v-if="title" class="mt-4 text-xl font-semibold text-gray-900 dark:text-white">
+                    {{ title }}
+                </h2>
+                <p v-if="description" class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                    {{ description }}
+                </p>
+            </div>
+
+            <!-- CONTEÚDO DO CARD (Formulário) -->
+            <div class="p-8">
                 <slot />
             </div>
+
+        </div>
+        
+        <!-- FOOTER -->
+        <div class="mt-8 text-center text-xs text-gray-400 dark:text-gray-500">
+            &copy; {{ new Date().getFullYear() }} Task Manager
         </div>
     </div>
 </template>

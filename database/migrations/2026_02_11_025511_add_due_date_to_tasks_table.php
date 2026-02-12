@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tasks', function (Blueprint $table) {
-            //
+            // Adiciona a coluna 'due_date' depois de 'description' e permite valores nulos
+            $table->date('due_date')->after('description')->nullable();
         });
     }
 
@@ -22,7 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('tasks', function (Blueprint $table) {
-            //
+            // Remove a coluna 'due_date'
+            $table->dropColumn('due_date'); 
         });
     }
 };
